@@ -16,21 +16,21 @@ jobs:
             console.log('Context repo:', context.repo);
             console.log('Issue number:', context.payload.issue.number);
             
-            // Try to create epic label
+            // Try to create test-epic label
             try {
               await github.rest.issues.createLabel({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                name: 'epic',
+                name: 'test-epic',
                 color: '0052cc',
-                description: 'Large feature requiring multiple sub-tasks'
+                description: 'Test epic label'
               });
-              console.log('Epic label created');
+              console.log('Test-epic label created');
             } catch (err) {
               if (err.status === 404) {
-                console.log('Epic label already exists');
+                console.log('Test-epic label already exists');
               } else {
-                console.error('Error creating epic label:', err);
+                console.error('Error creating test-epic label:', err);
               }
             }
             
@@ -39,6 +39,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.payload.issue.number,
-              labels: ['epic']
+              labels: ['test-epic']
             });
-            console.log('Epic label added to issue');
+            console.log('Test-epic label added to issue');
